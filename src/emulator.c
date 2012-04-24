@@ -7,8 +7,6 @@
 #define FALSE 0
 
 #define N 10000
-#define M 10
-#define K 10
 #define DISK_SIZE 100000
 
 int MemoryLookupTable[M];
