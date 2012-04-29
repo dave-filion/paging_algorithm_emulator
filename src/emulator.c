@@ -8,6 +8,7 @@
 
 #define N 10000
 #define DISK_SIZE 100000
+#define max_seq 100000
 
 int MemoryLookupTable[M];
 int PhysicalMemory[M];
@@ -112,7 +113,7 @@ void* thread_1(void* data) {
     int s = 0;
     int x;
 
-    //    while (TRUE) {
+    while (TRUE) {
       s = 0;
       for (i = 0; i < K; i++) {
 	obtainMemoryLock();
@@ -128,7 +129,7 @@ void* thread_1(void* data) {
       s += x;
 
       printf("1, %d\n", seq);
-      //    }
+    }
 }
 
 void* thread_2(void* data) {
@@ -137,7 +138,7 @@ void* thread_2(void* data) {
     int x;
     int round = 0;
 
-    //    while (TRUE) {
+    while (TRUE) {
       s = 0;
 
       if (round == N) {
@@ -156,7 +157,7 @@ void* thread_2(void* data) {
       }
 
       printf("2, %d\n", seq);
-      //    }
+    }
 }
 
 void* thread_3(void* data) {
@@ -164,7 +165,7 @@ void* thread_3(void* data) {
     int s;
     int x;
 
-    //    while (TRUE) {
+    while (TRUE) {
       s = 0;
 
       // Calculate common set
@@ -176,12 +177,18 @@ void* thread_3(void* data) {
       }
 
       printf("3, %d\n", seq);
-      //    }
+    }
 }
 
 int obtainMemoryLock() {
   pthread_mutex_lock (&memoryLock);
   seq++;
+
+  if ( seq == max_seq ) {
+    printf("Reached max sequence count, exiting\n");
+    exit(0);
+  }
+
   return 0;
 }
 

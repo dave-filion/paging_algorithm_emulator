@@ -1,6 +1,14 @@
 Paging Algorithm Emulation
+by David Filion
 
 Eviction Modes for Paging Algorithm:
 1 - Least Recently Used
 2 - Most Recently Used
 3 - Random Eviction
+
+To use:
+
+make
+./run.sh
+
+Output will go to output dir, seperated by [EVICTION MODE]_[N & K Configuration]
